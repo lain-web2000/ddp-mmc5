@@ -237,6 +237,43 @@ FDSBIOS_WRITEFILE:
 	lda #$00
 	rts
 
+.res $e97d - *, $ff
+Pixel2NamConv:
+	lda #$08
+	sta $00
+	lda $02
+	asl a
+	rol $00
+	asl a
+	rol $00
+	and #$e0
+	sta $01
+	lda $03
+	lsr a
+	lsr a
+	lsr a
+	ora $01
+	sta $01
+	rts
+	
+Nam2PixelConv:
+	lda $01
+	asl a
+	asl a
+	asl a
+	sta $03
+	lda $01
+	sta $02
+	lda $00
+	lsr a
+	ror $02
+	lsr a
+	ror $02
+	lda #$f8
+	and $02
+	sta $02
+	rts
+	
 .res $e9c8 - *, $ff
 	lda #$00
 	sta $2003
@@ -298,8 +335,11 @@ DetectUpToDownOnePad:
 	
 .res $f000 - *, $ff
 DoFileShit:
-	;lda GamesBeatenCount
-	;sta $5c00
+	ldx #$05
+:	lda $6600,x
+	sta $5c00,x
+	dex
+	bpl :-
 	ldy #$ff
 HandleNextFile:
 	iny
