@@ -110,6 +110,7 @@ ColdBoot:
 WarmBoot:	
 	lda PPU_STATUS         ;FDS BIOS stuff
 	lda #$00
+	sta $FD
 	sta PPU_SCROLL
 	sta PPU_SCROLL
 	lda #$10
