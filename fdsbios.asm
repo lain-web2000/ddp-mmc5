@@ -109,11 +109,18 @@ ColdBoot:
 	.word BootFiles
 WarmBoot:	
 	lda PPU_STATUS         ;FDS BIOS stuff
-	lda #$00
-	sta $FD
-	sta PPU_SCROLL
-	sta PPU_SCROLL
+	ldx #$00
+	stx $FB
+	stx $FC
+	stx $FD
+	stx PPU_SCROLL
+	stx PPU_SCROLL
+	dex
+	stx $F9
+	lda #$06
+	sta $FE
 	lda #$10
+	sta $FF
 	sta PPU_STATUS
 	cli
 	jmp ($dffc)            ;run game
