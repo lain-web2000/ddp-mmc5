@@ -1,0 +1,79 @@
+MEMORY
+{
+	NES2HDR:  start =     0, size =    $10, fill=yes, fillval=$00;
+	EDSNDD:   start = $6000, size =   $600, fill=yes, fillval=$FF;
+	SAVEDAT:  start = $6600, size =    $06, fill=yes, fillval=$FF;
+	ENDING2:  start = $B800, size =  $1900, fill=yes, fillval=$FF;
+	BANK0PAD: start = $0000, size =    $FA, fill=yes, fillval=$FF;
+	MAINPRO:  start = $6000, size =  $8000, fill=yes, fillval=$FF;
+	TITLEC:   start = $0000, size =  $1FF0, fill=yes, fillval=$FF;
+	BANK5PAD: start = $0000, size =    $10, fill=yes, fillval=$FF;
+	ENDINGC:  start = $0E00, size =  $0C00, fill=yes, fillval=$FF;
+	BANK6PAD: start = $0000, size =  $1400, fill=yes, fillval=$FF;
+	DUMMYDT:  start = $6600, size =    $06, fill=yes, fillval=$FF;
+	TEMPPRG:  start = $6600, size =  $05ff, fill=yes, fillval=$FF;
+	IMAJINC:  start = $0000, size =  $0340, fill=yes, fillval=$FF;
+	LINAC:    start = $0000, size =  $0340, fill=yes, fillval=$FF;
+	MAMAC:    start = $0000, size =  $0340, fill=yes, fillval=$FF;
+	PAPAC:    start = $0000, size =  $0340, fill=yes, fillval=$FF;
+	BGCHRC:   start = $0E00, size =  $0200, fill=yes, fillval=$FF;
+	BGCHR1:   start = $0E00, size =  $0A00, fill=yes, fillval=$FF;
+	BANK7PAD: start = $0000, size =    $FB, fill=yes, fillval=$FF;
+	BGCHR2:   start = $0E00, size =  $0A00, fill=yes, fillval=$FF;
+	BGCHR3:   start = $0E00, size =  $0A00, fill=yes, fillval=$FF;
+	BGCHR4:   start = $0E00, size =  $0A00, fill=yes, fillval=$FF;
+	BANK8PAD: start = $0000, size =  $0200, fill=yes, fillval=$FF;
+	ENDING1:  start = $C100, size =  $0600, fill=yes, fillval=$FF;
+	SOUNDDT:  start = $D679, size =  $0214, fill=yes, fillval=$FF;
+	CHAPT01:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	BANK9PAD: start = $0000, size =  $05EC, fill=yes, fillval=$FF;
+	CHAPT02:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	CHAPT03:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	CHAPT04:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	CHAPT05:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	CHAPT06:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	CHAPT07:  start = $BF00, size =  $1200, fill=yes, fillval=$FF;
+	BANK13PAD: start = $0000, size = $1400, fill=yes, fillval=$FF;
+	BANK14:   start = $0000, size =  $2000, fill=yes, fillval=$FF;
+	FDSBIOS:  start = $E000, size =  $2000, fill=yes, fillval=$FF;
+}
+
+SEGMENTS
+{
+	NES2HDR:  load = NES2HDR,  type = ro;
+	EDSNDD:   load = EDSNDD,   type = ro;
+	SAVEDAT:  load = SAVEDAT,  type = ro;
+	ENDING2:  load = ENDING2,  type = ro;
+	BANK0PAD: load = BANK0PAD, type = ro;
+	MAINPRO:  load = MAINPRO,  type = ro;
+	TITLEC:   load = TITLEC,   type = ro;
+	BANK5PAD: load = BANK5PAD, type = ro;
+	ENDINGC:  load = ENDINGC,  type = ro;
+	BANK6PAD: load = BANK6PAD, type = ro;
+	DUMMYDT:  load = DUMMYDT,  type = ro;
+	TEMPPRG:  load = TEMPPRG,  type = ro;
+	IMAJINC:  load = IMAJINC,  type = ro;
+	LINAC:    load = LINAC,    type = ro;
+	MAMAC:    load = MAMAC,    type = ro;
+	PAPAC:    load = PAPAC,    type = ro;
+	BGCHRC:   load = BGCHRC,   type = ro;
+	BGCHR1:   load = BGCHR1,   type = ro;
+	BANK7PAD: load = BANK7PAD, type = ro;
+	BGCHR2:   load = BGCHR2,   type = ro;
+	BGCHR3:   load = BGCHR3,   type = ro;
+	BGCHR4:   load = BGCHR4,   type = ro;
+	BANK8PAD: load = BANK8PAD, type = ro;
+	ENDING1:  load = ENDING1,  type = ro;
+	SOUNDDT:  load = SOUNDDT,  type = ro;
+	CHAPT01:  load = CHAPT01,  type = ro;
+	BANK9PAD: load = BANK9PAD, type = ro;
+	CHAPT02:  load = CHAPT02,  type = ro;
+	CHAPT03:  load = CHAPT03,  type = ro;
+	CHAPT04:  load = CHAPT04,  type = ro;
+	CHAPT05:  load = CHAPT05,  type = ro;
+	CHAPT06:  load = CHAPT06,  type = ro;
+	CHAPT07:  load = CHAPT07,  type = ro;
+	BANK13PAD: load = BANK13PAD, type = ro;
+	BANK14:   load = BANK14,  type = ro;
+	FDSBIOS:  load = FDSBIOS,  type = ro;
+}
