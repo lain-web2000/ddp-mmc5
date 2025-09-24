@@ -52,10 +52,11 @@ Reset:
     lda MMC5_IRQSTATUS
     ldx #$00
 	stx MMC5_CHRMODE
-    stx MMC5_PRG_6000
     stx MMC5_CHR_1C00
 	stx $012F
     inx
+    stx MMC5_PRG_6000
+	inx
     stx MMC5_PRG_8000
     inx
     stx MMC5_PRG_A000
@@ -225,14 +226,14 @@ NoIncReturn:
 
 .res $e239 - *, $ff
 FDSBIOS_WRITEFILE:
-	lda #$04
+	lda #$00
 	sta MMC5_PRG_C000
 	ldx #$05
 :	lda $6600,x
 	sta $c600,x
 	dex
 	bpl :-
-	lda #$03
+	lda #$04
 	sta MMC5_PRG_C000
 	pla
 	clc
@@ -244,6 +245,7 @@ FDSBIOS_WRITEFILE:
 	lda $08
 	pha
 	lda #$00
+	sta $012f
 	rts
 
 .res $e97d - *, $ff
@@ -393,7 +395,7 @@ LoadCurrentFile:
 	lsr
 	lsr
 	sec
-	sbc #$03
+	sbc #$02
 	sta $07
 	tya
 	pha
@@ -437,14 +439,14 @@ done:
 	tay
 	jmp HandleNextFile
 SaveFile:
-	lda #$04
+	lda #$00
 	sta MMC5_PRG_C000
 	ldx #$05
 :	lda $c600,x
 	sta $6600,x
 	dex
 	bpl :-
-	lda #$03
+	lda #$04
 	sta MMC5_PRG_C000
 	jmp HandleNextFile
 
@@ -497,9 +499,9 @@ DestInRange:
 	bcc DoNextByte
 	cpy $04				;low byte of length
 	bcc DoNextByte
-	lda #$03			;restore correct banks and leave
+	lda #$04			;restore correct banks and leave
     sta MMC5_PRG_C000
-    lda #$00
+    lda #$01
     sta MMC5_PRG_6000
 	rts
 DoNextByte:
