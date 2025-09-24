@@ -225,6 +225,11 @@ NoIncReturn:
 
 .res $e239 - *, $ff
 FDSBIOS_WRITEFILE:
+	ldx #$05
+:	lda $6600,x
+	sta $5c00,x
+	dex
+	bpl :-
 	pla
 	clc
 	adc #$04
@@ -332,14 +337,9 @@ DetectUpToDownOnePad:
 	DEX
 	BPL DetectUpToDownOnePad ; when X underflows to -127, this branch will not be taken
 	RTS
-	
+
 .res $f000 - *, $ff
 DoFileShit:
-	ldx #$05
-:	lda $6600,x
-	sta $5c00,x
-	dex
-	bpl :-
 	ldy #$ff
 HandleNextFile:
 	iny
@@ -350,6 +350,8 @@ HandleNextFile:
 	bne StartFileList
 LoadedFiles:
 	rts
+SaveFileStub:
+	jmp SaveFile
 StartFileList:
 	ldx #EndFileList-FileList-1
 CheckFileList:
@@ -359,8 +361,8 @@ CheckFileList:
 	bpl	CheckFileList
 	bmi HandleNextFile
 LoadCurrentFile:
-	;cmp #$0f
-	;beq SaveFile
+	cmp #$06
+	beq SaveFileStub
 	lda FileLenLow,x
 	sta $04
 	lda FileLenHigh,x
@@ -431,21 +433,12 @@ done:
 	tay
 	jmp HandleNextFile
 SaveFile:
-        ;ldx #$06                ;init counter
-SChkLp: ;lda SM2Header,x         ;check all seven bytes of the save data header
-        ;cmp SM2SAVE_Header,x    ;and see if it is identical to what it should be
-        ;bne InitializeSaveData  ;if any byte does not match, wipe existing save data
-        ;dex
-        ;bpl SChkLp              ;if not gone through all bytes, loop back
-		;lda $5c00
-		;sta GamesBeatenCount
-		;jmp HandleNextFile
-InitializeSaveData:
-        ;ldx #$00                ;init counter
-        ;stx GamesBeatenCount    ;wipe number of games beaten
-		;jmp HandleNextFile
-SM2Header:
-;        .byte "SM2SAVE"
+		ldx #$05
+:		lda $5c00,x
+		sta $6600,x
+		dex
+		bpl :-
+		jmp HandleNextFile
 
 FileList:
 	.byte $01,$02,$06,$10,$11,$12,$13,$20,$21,$22,$23,$24,$30,$31,$32,$33,$34,$35,$36,$37,$40,$a0,$c0,$d0,$d1,$e0
