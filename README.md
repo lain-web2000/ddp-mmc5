@@ -20,7 +20,7 @@ A port of Yume Kōjō: Doki Doki Panic to the NES using the [MMC5](https://www.n
 *You will manually need to create a 32K SRAM file named after the file you copied with a .NES extension in the **EDFC\SAVE** directory and use the **SRAM to File** option to save progress. Additionally, savestates will crash the game and require the ROM to be reloaded.
 
 ## Download & Patch Instructions
-[BPS Patch](https://github.com/lain-web2000/ddp-mmc5/blob/main/Yume%20Koujou%20Doki%20Doki%20Panic%20''(FDS%20Conversion%20-%20MMC5%20v1.0.2).bps)
+[BPS Patch](https://github.com/lain-web2000/ddp-mmc5/blob/main/Yume%20Koujou%20Doki%20Doki%20Panic%20(FDS%20Conversion%20-%20MMC5%20v1.0.2).bps)
 
 Patch this onto the following ROM:
 
