@@ -441,15 +441,32 @@ done:
 SaveFile:
 	lda #$00
 	sta MMC5_PRG_C000
+	ldx #$01
+:	lda $c604,x
+	cmp DDP_MagicBytes,x
+	bne InitializeSaveData
+	dex
+	bpl :-
 	ldx #$05
 :	lda $c600,x
 	sta $6600,x
 	dex
 	bpl :-
-	lda #$04
+:	lda #$04
 	sta MMC5_PRG_C000
 	jmp HandleNextFile
-
+InitializeSaveData:
+	ldx #$05
+:	lda DDP_CleanSRAM,x
+	sta $c600,x
+	dex
+	bpl :-
+	bne :--
+DDP_CleanSRAM:
+	.byte $00, $00, $00, $00
+DDP_MagicBytes:
+	.byte $5a, $a5
+	
 FileList:
 	.byte $01,$02,$06,$10,$11,$12,$13,$20,$21,$22,$23,$24,$30,$31,$32,$33,$34,$35,$36,$37,$40,$a0,$c0,$d0,$d1,$e0
 EndFileList:
