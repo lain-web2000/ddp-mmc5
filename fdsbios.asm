@@ -4,7 +4,7 @@
   .byte 0                                         ;  CHR
   .byte $52                                       ;  mirroring type and mapper number lower nibble
   .byte $08                                       ;  mapper number upper nibble
-  .byte $00,$00,$90,$07,$00,$00,$00,$00
+  .byte $00,$00,$A0,$07,$00,$00,$00,$00
 
 ;-------------------------------------------------------------------------------------
 ;DEFINES
@@ -225,11 +225,15 @@ NoIncReturn:
 
 .res $e239 - *, $ff
 FDSBIOS_WRITEFILE:
+	lda #$04
+	sta MMC5_PRG_C000
 	ldx #$05
 :	lda $6600,x
-	sta $5c00,x
+	sta $c600,x
 	dex
 	bpl :-
+	lda #$03
+	sta MMC5_PRG_C000
 	pla
 	clc
 	adc #$04
@@ -433,12 +437,16 @@ done:
 	tay
 	jmp HandleNextFile
 SaveFile:
-		ldx #$05
-:		lda $5c00,x
-		sta $6600,x
-		dex
-		bpl :-
-		jmp HandleNextFile
+	lda #$04
+	sta MMC5_PRG_C000
+	ldx #$05
+:	lda $c600,x
+	sta $6600,x
+	dex
+	bpl :-
+	lda #$03
+	sta MMC5_PRG_C000
+	jmp HandleNextFile
 
 FileList:
 	.byte $01,$02,$06,$10,$11,$12,$13,$20,$21,$22,$23,$24,$30,$31,$32,$33,$34,$35,$36,$37,$40,$a0,$c0,$d0,$d1,$e0
